@@ -28,24 +28,6 @@ if (count($pesan_datang) > 2) {
         $options .= $pesan_datang[$i];
     }
 }
-function bomsms($keyword) {
-    $uri = "http://48.nakocoders.org/api/jdid/api.php?nomor=$keyword";
-
-    $response = Unirest\Request::get("$uri");
-
-    $json = json_decode($response->raw_body, true);
-	$result .= "Sukses Silahkan Check [$keyword]\n-Nako";
-    return $result;
-}
-function asmaul($keyword) {
-    $uri = "http://api.aladhan.com/asmaAlHusna/$keyword";
-
-    $response = Unirest\Request::get("$uri");
-
-    $json = json_decode($response->raw_body, true);
-	$result .= $json['data']['0']['transliteration'] ;
-    return $result;
-}
 function iden($keyword) {
     $uri = "http://48.nakocoders.org/api/translate/api.php?textna=$keyword&bahasa1=id&bahasa2=en";
 
@@ -64,30 +46,6 @@ function enid($keyword) {
 	$result .= $json['translationResponse'];
     return $result;
 }
-function bomtel($keyword) {
-    $uri = "http://48.nakocoders.org/api/jdid/tk.php?nomor=$keyword";
-    $response = Unirest\Request::get("$uri");
-
-    $json = json_decode($response->raw_body, true);
-	$result .= "Sukses Silahkan Check [$keyword]\n-Nako";
-    return $result;
-}
-function bomsmstel($keyword) {
-    $uri = "http://48.nakocoders.org/api/jdid/tsel.php?nomor=$keyword";
-    $response = Unirest\Request::get("$uri");
-
-    $json = json_decode($response->raw_body, true);
-	$result .= "Sukses Silahkan Check [$keyword]\n-Nako";
-    return $result;
-}
-function bomsms3($keyword) {
-    $uri = "http://48.nakocoders.org/api/jdid/3.php?nomor=$keyword";
-    $response = Unirest\Request::get("$uri");
-
-    $json = json_decode($response->raw_body, true);
-	$result .= "Sukses Silahkan Check [$keyword]\n-Nako";
-    return $result;
-}
 if ($type == 'join' || $command == '/menu-list') {
     $text = "Welcome To NakoBOT\nUse Tools :\nSMS-BOM ALL : \n/sms1 <nohp>\n\BOM TELPON : \n/tel <nohp>\nBOM SMS 3 :\n/sms2 <nohp>\nBOM SMS TSEL : \n/sms3 <62nohp>\nTranslate ID-EN :\n/id-en <text>\nTranslate EN-ID :\n/en-id <text>\n-Nako";
     $balas = array(
@@ -99,62 +57,6 @@ if ($type == 'join' || $command == '/menu-list') {
             )
         )
     );
-}
-if($message['type']=='text') {
-	    if ($command == '/sms1') {
-        $result = bomsms($options);
-        $balas = array(
-            'replyToken' => $replyToken,
-            'messages' => array(
-                array(
-                    'type' => 'text',
-                    'text' => $result
-                )
-            )
-        );
-    }
-}
-if($message['type']=='text') {
-	    if ($command == '/sms2') {
-        $result = bomsms3($options);
-        $balas = array(
-            'replyToken' => $replyToken,
-            'messages' => array(
-                array(
-                    'type' => 'text',
-                    'text' => $result
-                )
-            )
-        );
-    }
-}
-if($message['type']=='text') {
-	    if ($command == '/sms3') {
-        $result = bomsmstel($options);
-        $balas = array(
-            'replyToken' => $replyToken,
-            'messages' => array(
-                array(
-                    'type' => 'text',
-                    'text' => $result
-                )
-            )
-        );
-    }
-}
-if($message['type']=='text') {
-	    if ($command == '/tel') {
-        $result = bomtel($options);
-        $balas = array(
-            'replyToken' => $replyToken,
-            'messages' => array(
-                array(
-                    'type' => 'text',
-                    'text' => $result
-                )
-            )
-        );
-    }
 }
 if($message['type']=='text') {
 	    if ($command == '/id-en') {
@@ -184,20 +86,7 @@ if($message['type']=='text') {
         );
     }
 }
-if($message['type']=='text') {
-	    if ($command == '/s') {
-        $result = asmaul($options);
-        $balas = array(
-            'replyToken' => $replyToken,
-            'messages' => array(
-                array(
-                    'type' => 'text',
-                    'text' => $result
-                )
-            )
-        );
-    }
-}else if($message['type']=='sticker')
+else if($message['type']=='sticker')
 {	
 	$balas = array(
 							'replyToken' => $replyToken,														
